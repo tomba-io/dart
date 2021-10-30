@@ -1,0 +1,19 @@
+name: tomba
+version: 1.0.0
+description: Tomba.io is an Email Finder for B2B sales and email marketing
+    - Email domain search.
+    - Email Finder.
+    - Email Verifier.
+    - Email Sources.
+    - Company autocomplete.
+homepage: https://tomba.io
+repository: https://github.com/tomba-io/dart
+issue_tracker: https://github.com/tomba-io/dart/issues
+documentation: https://tomba.io
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+dependencies:
+  http: ^0.13.3
+
+dev_dependencies:
+  test: ^1.16.8
