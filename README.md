@@ -27,7 +27,7 @@ dependencies:
 You can install packages from the command line:
 
 ```bash
-pub get tomba-dart
+pub get tomba
 ```
 
 ## Usage
