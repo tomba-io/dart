@@ -13,8 +13,8 @@ void main() {
 
   Future result = finder.emailFinder(
     domain: 'stripe.com',
-    firstName: 'Moskoz',
-    lastName: 'Dustin',
+    firstName: 'Fname',
+    lastName: 'Lname',
   );
 
   result

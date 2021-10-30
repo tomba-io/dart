@@ -37,7 +37,29 @@ pub get tomba
 get email addresses found on the internet.
 
 ```dart
+import 'package:tomba/tomba.dart';
 
+void main() { 
+  // Init SDK
+  Client client = Client();
+  Domain domain = Domain(client);
+
+  client
+   .setKey("ta_xxxx") // Your Key
+   .setSecret("ts_xxxx"); // Your Secret
+  ;
+
+  Future result = domain.domainSearch(
+    domain: 'stripe.com',
+  );
+
+  result
+    .then((response) {
+      print(response);
+    }).catchError((error) {
+      print(error.response);
+  });
+}
 ```
 
 ### Email Finder
@@ -45,7 +67,31 @@ get email addresses found on the internet.
 Find the verified email address of any professional.
 
 ```dart
+import 'package:tomba/tomba.dart';
 
+void main() { 
+  // Init SDK
+  Client client = Client();
+  Finder finder = Finder(client);
+
+  client
+   .setKey("ta_xxxx") // Your Key
+   .setSecret("ts_xxxx"); // Your Secret
+  ;
+
+  Future result = finder.emailFinder(
+    domain: 'stripe.com',
+    firstName: 'Fname',
+    lastName: 'Lname',
+  );
+
+  result
+    .then((response) {
+      print(response);
+    }).catchError((error) {
+      print(error.response);
+  });
+}
 ```
 
 ### Email Verifier
@@ -53,7 +99,29 @@ Find the verified email address of any professional.
 Verify the validity of any professional email address with the most complete email checker.
 
 ```dart
+import 'package:tomba/tomba.dart';
 
+void main() { 
+  // Init SDK
+  Client client = Client();
+  Verifier verifier = Verifier(client);
+
+  client
+   .setKey("ta_xxxx") // Your Key
+   .setSecret("ts_xxxx"); // Your Secret
+  ;
+
+  Future result = verifier.emailVerifier(
+    email: 'b.mohamed@tomba.io',
+  );
+
+  result
+    .then((response) {
+      print(response);
+    }).catchError((error) {
+      print(error.response);
+  });
+}
 ```
 
 ## Examples
