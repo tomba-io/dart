@@ -24,10 +24,10 @@ dependencies:
   tomba: ^v1.0.0
 ```
 
-You can install packages from the command line:
+You can install packages from the command line With [Dart](https://pub.dev/packages/tomba):
 
 ```bash
-pub get tomba
+dart pub add tomba
 ```
 
 ## Usage
