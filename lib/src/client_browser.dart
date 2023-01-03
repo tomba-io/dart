@@ -25,7 +25,7 @@ class ClientBrowser extends ClientBase with ClientMixin {
     _httpClient = BrowserClient();
     _headers = {
       'content-type': 'application/json',
-      'x-sdk-version': 'tomba:dart:v1.0.0',
+      'x-sdk-version': 'tomba:dart:v1.0.1',
     };
 
     this.config = {};

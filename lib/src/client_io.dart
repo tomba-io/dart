@@ -35,7 +35,7 @@ class ClientIO extends ClientBase with ClientMixin {
     this._endPoint = endPoint;
     this._headers = {
       'content-type': 'application/json',
-      'x-sdk-version': 'tomba:dart:v1.0.0',
+      'x-sdk-version': 'tomba:dart:v1.0.1',
     };
 
     this.config = {};
