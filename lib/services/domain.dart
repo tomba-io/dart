@@ -12,10 +12,10 @@ class Domain extends Service {
   ///
   Future<Response> domainSearch(
       {required String domain, int? page, int? limit, String? department}) {
-    final String path =
-        '/domain-search/{domain}'.replaceAll(RegExp('{domain}'), domain);
+    final String path = '/domain-search';
 
     final Map<String, dynamic> params = {
+      'domain': domain,
       'page': page,
       'limit': limit,
       'department': department,
