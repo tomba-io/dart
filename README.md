@@ -1,314 +1,537 @@
-# [<img src="https://app.tomba.io/logo.svg" alt="Tomba" width="25"/>](https://tomba.io/) Tomba Email Finder Dart Client Library
+# [<img src="https://tomba.io/logo.svg" alt="Tomba" width="25"/>](https://tomba.io/) Tomba Dart SDK
 
-This is the official Dart client library for the [Tomba.io](https://tomba.io) Email Finder API,
-allowing you to:
+> The #1 Rated Email Intelligence Platform — Find professional emails with unmatched accuracy.
 
--   [Domain Search](https://tomba.io/domain-search) (Search emails are based on the website You give one domain name and it returns all the email addresses found on the internet.)
--   [Email Finder](https://tomba.io/email-finder) (This API endpoint generates or retrieves the most likely email address from a domain name, a first name and a last name..)
--   [Author Finder](https://tomba.io/author-finder) (Instantly discover the email addresses of article authors.)
--   [Enrichment](https://tomba.io/author-finder) (The Enrichment lets you find the current job title, company, location and social profiles of the person behind the email.)
--   [Linkedin Finder](https://tomba.io/author-finder) (The Linkedin lets you find the current job title, company, location and social profiles of the person behind the linkedin URL.)
--   [Email Verifier](https://tomba.io/email-verifier) (checks the deliverability of a given email address, verifies if it has been found in our database, and returns their sources.)
+[![pub package](https://img.shields.io/pub/v/tomba.svg)](https://pub.dev/packages/tomba)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/tomba-io/dart/blob/main/LICENSE)
+
+This is the official Dart client library for the [Tomba.io](https://tomba.io) Email Finder API, providing access to all Tomba services including domain search, email finder, email verifier, enrichment, phone lookup, leads management, bulk operations, and more.
+
+## About Tomba
+
+[Tomba.io](https://tomba.io) is the #1 rated email intelligence platform, trusted by **150,000+ sales teams** worldwide.
+
+- **Best Email Finder** — 98% accuracy, ranked #1 in independent benchmarks
+- **Best Email Verification** — Real-time SMTP verification with catch-all detection
+- **Best Phone Finder** — Direct dial numbers linked to professional emails
+- **Best Domain Search** — 450M+ verified contacts across all industries
+- **81% Coverage** — The highest in the industry, proven in 5,000-lead independent tests
+
+### Why Tomba?
+
+| Feature             | Tomba              | Others        |
+| ------------------- | ------------------ | ------------- |
+| Email Coverage      | **81%**            | 30-60%        |
+| Verification        | **Real-time SMTP** | Pattern-based |
+| Phone Numbers       | **Direct dials**   | Limited       |
+| Catch-all Detection | **AI-powered**     | Basic         |
+| API Rate Limits     | **Generous**       | Restrictive   |
+
+[Get your free API key](https://app.tomba.io/auth/register) — No credit card required.
 
 ## Getting Started
 
-You'll need an Tomba API access token, which you can get by signing up for a free account at [https://app.tomba.io/auth/register](https://app.tomba.io/auth/register)
-
-The free plan is limited to 25 search request and 50 verification a month, To enable all the data fields and additional request volumes see [https://tomba.io/pricing](https://tomba.io/pricing).
+Below you will find the steps to install and start using the Tomba Dart SDK.
 
 ## Installation
 
-Add this to your package's `pubspec.yaml` file:
+Add `tomba` to your `pubspec.yaml`:
 
-```yml
+```yaml
 dependencies:
-    tomba: ^v1.0.1
+    tomba: ^1.0.1
 ```
 
-You can install packages from the command line With [Dart](https://pub.dev/packages/tomba):
+Or install from the command line:
 
 ```bash
 dart pub add tomba
 ```
 
-## Usage
+## Authentication
 
-### Domain Search
-
-get email addresses found on the internet.
+Get your API key and secret by signing up for a free account at [https://app.tomba.io/auth/register](https://app.tomba.io/auth/register).
 
 ```dart
 import 'package:tomba/tomba.dart';
 
-void main() {
-  // Init SDK
+Client client = Client();
+client
+  .setKey('ta_xxxx')     // Your Key
+  .setSecret('ts_xxxx'); // Your Secret
+```
+
+## Quick Start
+
+```dart
+import 'package:tomba/tomba.dart';
+
+void main() async {
   Client client = Client();
-  Domain domain = Domain(client);
-
   client
-   .setKey("ta_xxxx") // Your Key
-   .setSecret("ts_xxxx"); // Your Secret
-  ;
+    .setKey('ta_xxxx')
+    .setSecret('ts_xxxx');
 
-  Future result = domain.domainSearch(
-    domain: 'stripe.com',
+  // Search emails by domain
+  Domain domain = Domain(client);
+  var result = await domain.domainSearch(domain: 'example.com');
+  print(result);
+
+  // Find a specific email
+  Finder finder = Finder(client);
+  var email = await finder.emailFinder(
+    domain: 'example.com',
+    firstName: 'John',
+    lastName: 'Doe',
   );
-
-  result
-    .then((response) {
-      print(response);
-    }).catchError((error) {
-      print(error.response);
-  });
+  print(email);
 }
 ```
 
-#### Domain Search Response
+## Services
 
-```json
-{
-  "data": {
-    "organization": {
-      "location": {
-        "country": "US",
-        "city": "San Francisco",
-        "state": "California",
-        "street_address": "-122.41"
-      },
-      "social_links": {
-        "twitter_url": "https://twitter.com/stripe",
-        "facebook_url": "https://www.facebook.com/StripeHQ",
-        "linkedin_url": "https://www.linkedin.com/company/2135371"
-      },
-      "disposable": false,
-      "webmail": false,
-      "website_url": "stripe.com",
-      "phone_number": "",
-      "industries": "internet",
-      "postal_code": "94107",
-      "employee_count": 976,
-      "founded": "2010",
-      "company_size": "1001-5000",
-      "last_updated": "2023-03-28T16:21:55+01:00",
-      "revenue": "150000",
-      "accept_all": true,
-      "description": "Stripe is a financial infrastructure platform for businesses. Millions of companies—from the world’s largest enterprises to the most ambitious startups—use Stripe to accept payments, grow their revenue, and accelerate new business opportunities. Headquartered in San Francisco and Dublin, the company aims to increase the GDP of the internet.",
-      "pattern": "{first}",
-      "domain_score": 30,
-      "organization": "stripe",
-      "whois": {
-        "registrar_name": "SafeNames Ltd.",
-        "created_date": "1995-09-12 00:00:00",
-        "referral_url": "https://www.safenames.net/"
-      }
-    },
-    "emails": [
-      {
-        "email": "**@stripe.com",
-        "first_name": "**",
-        "last_name": "**",
-        "full_name": "** **",
-        "gender": "female",
-        "phone_number": null,
-        "type": "personal",
-        "country": "US",
-        "position": "Financial Crimes Analyst",
-        "department": "finance",
-        "seniority": "senior",
-        "twitter": null,
-        "linkedin": "https://www.linkedin.com/in/**",
-        "accept_all": true,
-        "pattern": "{first}",
-        "score": 90,
-        "verification": { "date": null, "status": null },
-        "last_updated": "2023-02-21T14:18:24+01:00",
-        "sources": [
-          {
-            "uri": "https://stripe.com/docs/cli",
-            "website_url": "stripe.com",
-            "extracted_on": "2022-03-08T01:23:16+01:00",
-            "last_seen_on": "2022-08-04T09:42:10+01:00",
-            "still_on_page": true
-          }
-        ]
-      },
-      ...
-      ...
-      ...
-      ...
-    ]
-  },
-  "meta": { "total": 2031, "pageSize": 10, "current": 0, "total_pages": 204 }
-}
+### Domain Search
+
+Search emails for a domain. Returns all email addresses found on the internet for the given domain.
+
+```dart
+Domain domain = Domain(client);
+var result = await domain.domainSearch(domain: 'example.com');
+print(result);
 ```
 
 ### Email Finder
 
-Find the verified email address of any professional.
+Find the most likely email address from a domain name, first name, and last name.
 
 ```dart
-import 'package:tomba/tomba.dart';
-
-void main() {
-  // Init SDK
-  Client client = Client();
-  Finder finder = Finder(client);
-
-  client
-   .setKey("ta_xxxx") // Your Key
-   .setSecret("ts_xxxx"); // Your Secret
-  ;
-
-  Future result = finder.emailFinder(
-    domain: 'stripe.com',
-    firstName: 'Fname',
-    lastName: 'Lname',
-  );
-
-  result
-    .then((response) {
-      print(response);
-    }).catchError((error) {
-      print(error.response);
-  });
-}
-```
-
-#### Email Finder Response
-
-```json
-{
-  "data": {
-    "email": "b.mohamed@tomba.io",
-    "first_name": "Mohamed",
-    "last_name": "Ben rebia",
-    "full_name": "Mohamed Ben rebia",
-    "gender": "male",
-    "country": null,
-    "position": "CEO",
-    "twitter": null,
-    "linkedin": "https://www.linkedin.com/in/mohamed-ben-rebia",
-    "phone_number": null,
-    "accept_all": null,
-    "website_url": "tomba.io",
-    "company": "Tomba technology web service LLC ",
-    "score": 99,
-    "verification": { "date": "2022-05-25", "status": "valid" },
-    "sources": [
-      {
-        "uri": "https://github.com/tomba-io/generic-emails/blob/084fc1a63d3cdaf9a34f255bedc2baea49a8e8b9/src/lib/validation/hash.ts",
-        "website_url": "github.com",
-        "extracted_on": "2021-02-08T20:09:54+01:00",
-        "last_seen_on": "2021-02-08T22:43:40+01:00",
-        "still_on_page": true
-      },
-     ...
-     ...
-     ...
-    ]
-  }
-}
+Finder finder = Finder(client);
+var result = await finder.emailFinder(
+  domain: 'example.com',
+  firstName: 'John',
+  lastName: 'Doe',
+);
+print(result);
 ```
 
 ### Email Verifier
 
-Verify the validity of any professional email address with the most complete email checker.
+Verify the deliverability of a given email address.
 
 ```dart
-import 'package:tomba/tomba.dart';
-
-void main() {
-  // Init SDK
-  Client client = Client();
-  Verifier verifier = Verifier(client);
-
-  client
-   .setKey("ta_xxxx") // Your Key
-   .setSecret("ts_xxxx"); // Your Secret
-  ;
-
-  Future result = verifier.emailVerifier(
-    email: 'b.mohamed@tomba.io',
-  );
-
-  result
-    .then((response) {
-      print(response);
-    }).catchError((error) {
-      print(error.response);
-  });
-}
+Verifier verifier = Verifier(client);
+var result = await verifier.emailVerifier(email: 'john@example.com');
+print(result);
 ```
 
-#### Email Verifier Response
+### Author Finder
 
-```json
-{
-  "data": {
-    "email": {
-      "mx_records": true,
-      "smtp_server": true,
-      "smtp_check": true,
-      "accept_all": false,
-      "block": false,
-      "email": "b.mohamed@tomba.io",
-      "gibberish": false,
-      "disposable": false,
-      "webmail": false,
-      "regex": true,
-      "whois": {
-        "registrar_name": "NameCheap, Inc.",
-        "created_date": "2020-07-07 20:54:07",
-        "referral_url": "https://www.namecheap.com/"
-      },
-      "status": "valid",
-      "result": "deliverable",
-      "score": 100
-    },
-    "sources": [
-      {
-        "uri": "https://github.com/tomba-io/generic-emails/blob/084fc1a63d3cdaf9a34f255bedc2baea49a8e8b9/src/lib/validation/hash.ts",
-        "website_url": "github.com",
-        "extracted_on": "2021-02-08T20:09:54+01:00",
-        "last_seen_on": "2021-02-08T22:43:40+01:00",
-        "still_on_page": true
-      },
-      ...
-      ...
-      ...
-    ]
-  }
-}
+Find the email address of the author of a blog post or article.
+
+```dart
+Finder finder = Finder(client);
+var result = await finder.authorFinder(url: 'https://example.com/blog/post');
+print(result);
 ```
 
-## Examples
+### LinkedIn Finder
 
-Sample codes under [**examples/**](/examples/) folder.
+Find the email address associated with a LinkedIn profile URL.
 
-## Documentation
+```dart
+Finder finder = Finder(client);
+var result = await finder.linkedinFinder(
+  url: 'https://www.linkedin.com/in/johndoe',
+);
+print(result);
+```
 
-See the [official documentation](https://docs.tomba.io/introduction).
+### Email Enrichment (Person / Company / Combined)
 
-### Other Libraries
+Person, company, and combined enrichment APIs.
 
-There are official Tomba Email Finder client libraries available for many languages including PHP, Python, Go, Java, Ruby, and many popular frameworks such as Django, Rails and Laravel. There are also many third party libraries and integrations available for our API.
+```dart
+Enrichment enrichment = Enrichment(client);
 
-[https://docs.tomba.io/libraries](https://docs.tomba.io/libraries)
+// Person enrichment
+var person = await enrichment.person(email: 'john@example.com');
+print(person);
 
-### About Tomba
+// Company enrichment
+var company = await enrichment.company(domain: 'example.com');
+print(company);
 
-Founded in 2021, Tomba prides itself on being the most reliable, accurate, and in-depth source of Email address data available anywhere. We process terabytes of data to produce our Email finder API, company.
+// Combined enrichment
+var combined = await enrichment.combined(email: 'john@example.com');
+print(combined);
+```
 
-[![image](https://avatars.githubusercontent.com/u/67979591?s=200&v=4)](https://tomba.io/)
+### Phone Finder
 
-## Contribution
+Find a phone number using an email address.
 
-1. Fork it (<https://github.com/tomba-io/dart/fork>)
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+```dart
+Finder finder = Finder(client);
+var result = await finder.phoneFinder(email: 'john@example.com');
+print(result);
+
+// Or using the PhoneFinder service directly
+PhoneFinder phone = PhoneFinder(client);
+var result2 = await phone.finder(email: 'john@example.com');
+print(result2);
+```
+
+### Phone Validator
+
+Validate a phone number and get additional information.
+
+```dart
+PhoneFinder phone = PhoneFinder(client);
+var result = await phone.validator(phone: '+1234567890');
+print(result);
+```
+
+### Email Count
+
+Get the total number of email addresses Tomba has for a domain.
+
+```dart
+Count count = Count(client);
+var result = await count.emailCount(domain: 'example.com');
+print(result);
+```
+
+### Domain Status
+
+Check whether a domain is a webmail or disposable email provider.
+
+```dart
+Status status = Status(client);
+var result = await status.domainStatus(domain: 'example.com');
+print(result);
+```
+
+### Domain Suggestions (Autocomplete)
+
+Auto-complete company names and retrieve logo and domain information.
+
+```dart
+Status status = Status(client);
+var result = await status.autoComplete(query: 'exampl');
+print(result);
+```
+
+### Email Sources
+
+Find the web sources where an email address has been found.
+
+```dart
+Sources sources = Sources(client);
+var result = await sources.emailSources(email: 'john@example.com');
+print(result);
+```
+
+### Email Format
+
+Detect the email format used by a company.
+
+```dart
+Format format = Format(client);
+var result = await format.emailFormat(email: 'example.com');
+print(result);
+```
+
+### Similar Domains
+
+Find domains similar to the given one.
+
+```dart
+Similar similar = Similar(client);
+var result = await similar.websites(domain: 'example.com');
+print(result);
+```
+
+### Technology Checker
+
+Check what technologies a website uses.
+
+```dart
+Technology technology = Technology(client);
+var result = await technology.list(domain: 'example.com');
+print(result);
+```
+
+### Location
+
+Get location information based on IP address.
+
+```dart
+Location location = Location(client);
+var result = await location.getLocation();
+print(result);
+```
+
+### Reveal (Companies Search)
+
+Search for companies by various criteria.
+
+```dart
+Reveal reveal = Reveal(client);
+var result = await reveal.companiesSearch(query: 'technology');
+print(result);
+```
+
+### Leads
+
+Manage your saved leads -- list, get, create, update, and delete.
+
+```dart
+Leads leads = Leads(client);
+
+// List leads
+var list = await leads.listLeads();
+print(list);
+
+// Get a single lead
+var lead = await leads.getLead(id: 'lead_id');
+print(lead);
+
+// Create a lead
+var created = await leads.createLead(data: {
+  'email': 'john@example.com',
+  'first_name': 'John',
+  'last_name': 'Doe',
+});
+print(created);
+
+// Update a lead
+var updated = await leads.updateLead(
+  id: 'lead_id',
+  data: {'first_name': 'Jane'},
+);
+print(updated);
+
+// Delete a lead
+var deleted = await leads.deleteLead(id: 'lead_id');
+print(deleted);
+```
+
+### Leads Lists
+
+Manage your leads lists -- list, create, update, and delete.
+
+```dart
+LeadsLists leadsLists = LeadsLists(client);
+
+// List all leads lists
+var lists = await leadsLists.getLists();
+print(lists);
+
+// Create a leads list
+var created = await leadsLists.createList(name: 'My List');
+print(created);
+
+// Update a leads list
+var updated = await leadsLists.updateListId(id: 'list_id', name: 'Updated List');
+print(updated);
+
+// Delete a leads list
+var deleted = await leadsLists.deleteListId(id: 'list_id');
+print(deleted);
+```
+
+### Leads Attributes
+
+Manage custom lead attributes -- list, create, update, and delete.
+
+```dart
+LeadsAttributes attrs = LeadsAttributes(client);
+
+// List all attributes
+var list = await attrs.getLeadAttributes();
+print(list);
+
+// Create an attribute
+var created = await attrs.createLeadAttribute(
+  name: 'Company Size',
+  type: 'string',
+);
+print(created);
+
+// Update an attribute
+var updated = await attrs.updateLeadAttribute(
+  id: 'attr_id',
+  name: 'Company Revenue',
+);
+print(updated);
+
+// Delete an attribute
+var deleted = await attrs.deleteLeadAttribute(id: 'attr_id');
+print(deleted);
+```
+
+### Keys
+
+Manage your API keys.
+
+```dart
+Keys keys = Keys(client);
+
+// List all keys
+var list = await keys.getKeys();
+print(list);
+
+// Create a key
+var created = await keys.createKey();
+print(created);
+
+// Reset a key
+var reset = await keys.resetKey(id: 'key_id');
+print(reset);
+
+// Delete a key
+var deleted = await keys.deleteKey(id: 'key_id');
+print(deleted);
+```
+
+### Usage
+
+Return your monthly API request usage.
+
+```dart
+Usage usage = Usage(client);
+var result = await usage.getUsage();
+print(result);
+```
+
+### Logs
+
+Return the last 1,000 API requests made in the past 3 months.
+
+```dart
+Logs logs = Logs(client);
+var result = await logs.getLogs();
+print(result);
+```
+
+### Flag
+
+List and create email address flags.
+
+```dart
+Flag flag = Flag(client);
+
+// List flags
+var list = await flag.listFlags();
+print(list);
+
+// Create a flag
+var created = await flag.createFlag(
+  email: 'john@example.com',
+  flag: 'invalid',
+);
+print(created);
+```
+
+### Bulk
+
+Manage bulk email operations -- list, get, create, launch, archive, rename, check progress, and download.
+
+```dart
+Bulk bulk = Bulk(client);
+
+// List all bulk tasks
+var list = await bulk.list();
+print(list);
+
+// Get a bulk task
+var task = await bulk.get(id: 'bulk_id');
+print(task);
+
+// Create a bulk task
+var created = await bulk.create(data: {'name': 'My Bulk Task'});
+print(created);
+
+// Launch a bulk task
+var launched = await bulk.launch(id: 'bulk_id');
+print(launched);
+
+// Check bulk progress
+var progress = await bulk.progress(id: 'bulk_id');
+print(progress);
+
+// Download bulk results
+var download = await bulk.download(id: 'bulk_id');
+print(download);
+
+// Rename a bulk task
+var renamed = await bulk.rename(id: 'bulk_id', name: 'New Name');
+print(renamed);
+
+// Archive a bulk task
+var archived = await bulk.archive(id: 'bulk_id');
+print(archived);
+
+// Delete a bulk task
+var deleted = await bulk.delete(id: 'bulk_id');
+print(deleted);
+```
+
+## Testing
+
+```bash
+dart test
+```
+
+## About Tomba
+
+### Products
+
+- [Email Finder](https://tomba.io/email-finder) — Find any professional email address in seconds
+- [Email Verifier](https://tomba.io/email-verifier) — Keep your email list clean and deliverable
+- [Domain Search](https://tomba.io/domain-search) — Discover all emails associated with a company
+- [Phone Finder](https://tomba.io/phone-finder) — Get direct dial phone numbers for your leads
+- [Email Enrichment](https://tomba.io/enrichment) — Enrich contacts with company and social data
+- [Bulk Email Finder](https://tomba.io/bulk-email-finder) — Find emails in bulk from a list of names and domains
+- [Bulk Email Verifier](https://tomba.io/bulk-email-verifier) — Verify thousands of emails at once
+- [Bulk Domain Search](https://tomba.io/bulk-domain-search) — Search emails across multiple domains
+
+### Browser Extensions
+
+- [Chrome Extension](https://tomba.io/chrome-extension) — Find emails while browsing LinkedIn and company websites
+- [Firefox Addon](https://tomba.io/firefox) — Email discovery right from your Firefox browser
+
+### Integrations
+
+- [HubSpot](https://tomba.io/hubspot) — Sync found emails directly to HubSpot
+- [Zapier](https://tomba.io/integrations/zapier) — Connect Tomba to 5,000+ apps
+- [Google Sheets](https://tomba.io/sheets) — Find and verify emails inside Google Sheets
+
+### Other SDKs
+
+| Language | GitHub                                                | Package                                                   |
+| -------- | ----------------------------------------------------- | --------------------------------------------------------- |
+| PHP      | [tomba-io/php](https://github.com/tomba-io/php)       | [Packagist](https://packagist.org/packages/tomba-io/php)  |
+| Python   | [tomba-io/python](https://github.com/tomba-io/python) | [PyPI](https://pypi.org/project/tomba)                    |
+| Go       | [tomba-io/go](https://github.com/tomba-io/go)         | [Go Packages](https://pkg.go.dev/github.com/tomba-io/go)  |
+| Java     | [tomba-io/java](https://github.com/tomba-io/java)     | [Maven](https://search.maven.org/artifact/io.tomba/tomba) |
+| Ruby     | [tomba-io/ruby](https://github.com/tomba-io/ruby)     | [RubyGems](https://rubygems.org/gems/tomba)               |
+| C#       | [tomba-io/csharp](https://github.com/tomba-io/csharp) | [NuGet](https://www.nuget.org/packages/Tomba)             |
+| Rust     | [tomba-io/rust](https://github.com/tomba-io/rust)     | [Crates.io](https://crates.io/crates/tomba)               |
+| Dart     | [tomba-io/dart](https://github.com/tomba-io/dart)     | [pub.dev](https://pub.dev/packages/tomba)                 |
+| Lua      | [tomba-io/lua](https://github.com/tomba-io/lua)       | [LuaRocks](https://luarocks.org/modules/tomba-io/tomba)   |
+| Deno     | [tomba-io/deno](https://github.com/tomba-io/deno)     | [deno.land](https://deno.land/x/tomba)                    |
+
+### Resources
+
+- [API Documentation](https://docs.tomba.io/) — Complete API reference
+- [Blog](https://tomba.io/blog) — Tips on email finding and outreach
+- [FAQ](https://help.tomba.io/en/) — Frequently asked questions
+
+---
+
+**[Try Tomba Free](https://app.tomba.io/auth/register)** — 50 free searches/month. No credit card required.
 
 ## License
 
-Please see the [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html) file for more information.
+Apache 2.0 -- see [LICENSE](http://www.apache.org/licenses/LICENSE-2.0.html) for details.

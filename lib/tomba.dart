@@ -1,9 +1,6 @@
 library tomba;
 
-import 'dart:async';
-import 'package:http/http.dart' as http;
 import 'src/enums.dart';
-import 'src/client.dart';
 import 'src/response.dart';
 import 'src/service.dart';
 
@@ -23,3 +20,13 @@ part 'services/logs.dart';
 part 'services/keys.dart';
 part 'services/leads-lists.dart';
 part 'services/leads-attributes.dart';
+part 'services/phone.dart';
+part 'services/format.dart';
+part 'services/location.dart';
+part 'services/similar.dart';
+part 'services/technology.dart';
+part 'services/enrichment.dart';
+part 'services/reveal.dart';
+part 'services/flag.dart';
+part 'services/leads.dart';
+part 'services/bulk.dart';

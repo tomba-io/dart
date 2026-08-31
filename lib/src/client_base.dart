@@ -4,18 +4,24 @@ import 'enums.dart';
 
 abstract class ClientBase implements Client {
   /// Your Key
-  ClientBase setKey(value);
+  @override
+  ClientBase setKey(String value);
 
   /// Your Secret
-  ClientBase setSecret(value);
+  @override
+  ClientBase setSecret(String value);
 
+  @override
   ClientBase setSelfSigned({bool status = true});
 
+  @override
   ClientBase setEndpoint(String endPoint);
 
+  @override
   ClientBase addHeader(String key, String value);
 
-  Future<Response> call(
+  @override
+  Future<Response<dynamic>> call(
     HttpMethod method, {
     String path = '',
     Map<String, String> headers = const {},

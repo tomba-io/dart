@@ -1,18 +1,27 @@
-part of tomba;
+part of '../tomba.dart';
 
+/// Logs
+///
+/// Check your API request logs.
+///
+/// See [Logs API](https://docs.tomba.io/api/account#retrieve-api-logs)
 class Logs extends Service {
-  Logs(Client client) : super(client);
+  Logs(super.client);
 
-  /// get Logs
+  /// Get Logs
   ///
-  /// Returns a your last 1,000 requests you made during the last 3 months.
+  /// Returns your last 1,000 requests you made during the last 3 months.
   ///
-  Future<Response> getLogs() {
-    final String path = '/logs';
+  /// See [Get Logs API](https://docs.tomba.io/api/account#retrieve-api-logs#get-logs)
+  Future<Response<dynamic>> getLogs({int? page, int? limit}) {
+    const String path = '/logs';
 
-    final Map<String, dynamic> params = {};
+    final Map<String, dynamic> params = {
+      'page': page,
+      'limit': limit,
+    };
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 

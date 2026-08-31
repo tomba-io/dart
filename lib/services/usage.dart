@@ -1,18 +1,24 @@
-part of tomba;
+part of '../tomba.dart';
 
+/// Usage
+///
+/// Check your monthly API usage.
+///
+/// See [Usage API](https://docs.tomba.io/api/account#retrieve-api-usage)
 class Usage extends Service {
-  Usage(Client client) : super(client);
+  Usage(super.client);
 
-  /// get Usage
+  /// Get Usage
   ///
-  /// Returns a your monthly requests
+  /// Returns your monthly requests.
   ///
-  Future<Response> getUsage() {
-    final String path = '/usage';
+  /// See [Get Usage API](https://docs.tomba.io/api/account#retrieve-api-usage#get-usage)
+  Future<Response<dynamic>> getUsage() {
+    const String path = '/usage';
 
-    final Map<String, dynamic> params = {};
+    const Map<String, dynamic> params = {};
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 

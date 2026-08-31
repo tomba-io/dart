@@ -1,18 +1,24 @@
-part of tomba;
+part of '../tomba.dart';
 
+/// Keys
+///
+/// Manage your API keys.
+///
+/// See [Keys API](https://docs.tomba.io/api/keys)
 class Keys extends Service {
-  Keys(Client client) : super(client);
+  Keys(super.client);
 
   /// Get your keys.
   ///
   /// Returns a list of your keys.
   ///
-  Future<Response> getKeys() {
-    final String path = '/keys/{id}';
+  /// See [List Keys API](https://docs.tomba.io/api/keys)
+  Future<Response<dynamic>> getKeys() {
+    const String path = '/keys';
 
-    final Map<String, dynamic> params = {};
+    const Map<String, dynamic> params = {};
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 
@@ -22,14 +28,15 @@ class Keys extends Service {
 
   /// Delete key
   ///
-  /// Delete key
+  /// Delete a specific key by passing its id.
   ///
-  Future<Response> deleteKey({required String id}) {
-    final String path = '/keys/{id}'.replaceAll(RegExp('{id}'), id);
+  /// See [Delete Key API](https://docs.tomba.io/api/keys#delete-an-api-key)
+  Future<Response<dynamic>> deleteKey({required String id}) {
+    final String path = '/keys/$id';
 
-    final Map<String, dynamic> params = {};
+    const Map<String, dynamic> params = {};
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 
@@ -41,12 +48,13 @@ class Keys extends Service {
   ///
   /// Create a new Key.
   ///
-  Future<Response> createKey() {
-    final String path = '/keys/{id}';
+  /// See [Create Key API](https://docs.tomba.io/api/keys#create-an-api-key)
+  Future<Response<dynamic>> createKey() {
+    const String path = '/keys';
 
-    final Map<String, dynamic> params = {};
+    const Map<String, dynamic> params = {};
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 
@@ -56,14 +64,15 @@ class Keys extends Service {
 
   /// Reset a key
   ///
-  /// Rest your key.
+  /// Reset your key.
   ///
-  Future<Response> resetKey({required String id}) {
-    final String path = '/keys/{id}'.replaceAll(RegExp('{id}'), id);
+  /// See [Reset Key API](https://docs.tomba.io/api/keys#reset-an-api-key)
+  Future<Response<dynamic>> resetKey({required String id}) {
+    final String path = '/keys/$id';
 
-    final Map<String, dynamic> params = {};
+    const Map<String, dynamic> params = {};
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 

@@ -1,19 +1,27 @@
-part of tomba;
+part of '../tomba.dart';
 
+/// Verifier
+///
+/// Verify email addresses.
+///
+/// See [Email Verifier API](https://docs.tomba.io/api/verifier)
 class Verifier extends Service {
-  Verifier(Client client) : super(client);
+  Verifier(super.client);
 
   /// Email Verifier
   ///
-  /// verify the deliverability of an email address.
+  /// Verify the deliverability of an email address.
   ///
-  Future<Response> emailVerifier({required String email}) {
-    final String path =
-        '/email-verifier/{email}'.replaceAll(RegExp('{email}'), email);
+  /// See [Email Verifier API](https://docs.tomba.io/api/verifier#email-verifier)
+  Future<Response<dynamic>> emailVerifier({required String email, String? webhookUrl}) {
+    const String path = '/email-verifier';
 
-    final Map<String, dynamic> params = {};
+    final Map<String, dynamic> params = {
+      'email': email,
+      'webhook_url': webhookUrl,
+    };
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 

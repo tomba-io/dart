@@ -1,18 +1,24 @@
-part of tomba;
+part of '../tomba.dart';
 
+/// Leads Attributes
+///
+/// Manage your lead attributes.
+///
+/// See [Leads Attributes API](https://docs.tomba.io/api/leads-attributes)
 class LeadsAttributes extends Service {
-  LeadsAttributes(Client client) : super(client);
+  LeadsAttributes(super.client);
 
   /// Get Lead Attributes
   ///
   /// Returns a list of Lead Attributes.
   ///
-  Future<Response> getLeadAttributes() {
-    final String path = '/leads/attributes/{id}';
+  /// See [List Lead Attributes API](https://docs.tomba.io/api/leads-attributes#list-lead-attributes)
+  Future<Response<dynamic>> getLeadAttributes() {
+    const String path = '/leads/attributes';
 
-    final Map<String, dynamic> params = {};
+    const Map<String, dynamic> params = {};
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 
@@ -22,14 +28,15 @@ class LeadsAttributes extends Service {
 
   /// Delete Lead Attribute
   ///
-  /// Delete a specific Attributes by passing id.
+  /// Delete a specific Attribute by passing id.
   ///
-  Future<Response> deleteLeadAttribute({required String id}) {
-    final String path = '/leads/attributes/{id}'.replaceAll(RegExp('{id}'), id);
+  /// See [Delete Lead Attribute API](https://docs.tomba.io/api/leads-attributes#delete-lead-attribute)
+  Future<Response<dynamic>> deleteLeadAttribute({required String id}) {
+    final String path = '/leads/attributes/$id';
 
-    final Map<String, dynamic> params = {};
+    const Map<String, dynamic> params = {};
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 
@@ -39,14 +46,19 @@ class LeadsAttributes extends Service {
 
   /// Create Lead Attribute
   ///
-  /// Create a new Attributes with the name and type request parameter.
+  /// Create a new Attribute with the name and type request parameter.
   ///
-  Future<Response> createLeadAttribute() {
-    final String path = '/leads/attributes/{id}';
+  /// See [Create Lead Attribute API](https://docs.tomba.io/api/leads-attributes#create-lead-attribute)
+  Future<Response<dynamic>> createLeadAttribute(
+      {required String name, required String type}) {
+    const String path = '/leads/attributes';
 
-    final Map<String, dynamic> params = {};
+    final Map<String, dynamic> params = {
+      'name': name,
+      'type': type,
+    };
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 
@@ -56,14 +68,17 @@ class LeadsAttributes extends Service {
 
   /// Update Lead Attribute
   ///
-  /// Update the fields of a Attributes using id.
+  /// Update the fields of an Attribute using id.
   ///
-  Future<Response> updateLeadAttribute({required String id}) {
-    final String path = '/leads/attributes/{id}'.replaceAll(RegExp('{id}'), id);
+  /// See [Update Lead Attribute API](https://docs.tomba.io/api/leads-attributes#update-lead-attribute)
+  Future<Response<dynamic>> updateLeadAttribute({required String id, String? name}) {
+    final String path = '/leads/attributes/$id';
 
-    final Map<String, dynamic> params = {};
+    final Map<String, dynamic> params = {
+      'name': name,
+    };
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 

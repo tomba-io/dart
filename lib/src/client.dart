@@ -5,29 +5,29 @@ import 'client_stub.dart'
 import 'response.dart';
 
 abstract class Client {
-  late Map<String, String> config;
-  late String _endPoint;
-
-  String get endPoint => _endPoint;
-
   factory Client(
           {String endPoint = 'https://api.tomba.io/v1',
           bool selfSigned = false}) =>
       createClient(endPoint: endPoint, selfSigned: selfSigned);
+
+  late Map<String, String> config;
+  late String _endPoint;
+
+  String get endPoint => _endPoint;
 
   Client setSelfSigned({bool status = true});
 
   Client setEndpoint(String endPoint);
 
   /// Your Key
-  Client setKey(value);
+  Client setKey(String value);
 
   /// Your Secret
-  Client setSecret(value);
+  Client setSecret(String value);
 
   Client addHeader(String key, String value);
 
-  Future<Response> call(
+  Future<Response<dynamic>> call(
     HttpMethod method, {
     String path = '',
     Map<String, String> headers = const {},

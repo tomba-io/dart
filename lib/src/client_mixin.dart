@@ -4,7 +4,7 @@ import 'response.dart';
 import 'dart:convert';
 import 'enums.dart';
 
-class ClientMixin {
+mixin ClientMixin {
   http.BaseRequest prepareRequest(
     HttpMethod method, {
     required Uri uri,
@@ -19,15 +19,15 @@ class ClientMixin {
     if (method == HttpMethod.get) {
       final encoded = <String, dynamic>{};
       if (params.isNotEmpty) {
-        params.keys.forEach((key) {
+        for (final key in params.keys) {
           if (params[key] is int || params[key] is double) {
             encoded[key] = params[key].toString();
           } else if (params[key] is List) {
-            encoded[key + "[]"] = params[key];
+            encoded['$key[]'] = params[key];
           } else {
             encoded[key] = params[key];
           }
-        });
+        }
       }
       uri = Uri(
           fragment: uri.fragment,
@@ -45,15 +45,14 @@ class ClientMixin {
     return request;
   }
 
-  Response prepareResponse(http.Response res, {ResponseType? responseType}) {
-    if (responseType == null) {
-      responseType = ResponseType.json;
-    }
+  Response<dynamic> prepareResponse(http.Response res,
+      {ResponseType? responseType}) {
+    responseType ??= ResponseType.json;
     if (res.statusCode >= 400) {
       if ((res.headers['content-type'] ?? '').contains('application/json')) {
         final response = json.decode(res.body);
         throw TombaException(
-          response['errors']['message'],
+          response['errors']['message'] as String?,
           res.statusCode,
           response,
         );
@@ -61,7 +60,7 @@ class ClientMixin {
         throw TombaException(res.body);
       }
     }
-    var data;
+    dynamic data;
     if ((res.headers['content-type'] ?? '').contains('application/json')) {
       if (responseType == ResponseType.json) {
         data = json.decode(res.body);
@@ -77,13 +76,14 @@ class ClientMixin {
         data = res.body;
       }
     }
-    return Response(data: data);
+    final rateLimit = RateLimit.fromHeaders(res.headers);
+    return Response<dynamic>(data: data, rateLimit: rateLimit);
   }
 
   Future<http.Response> toResponse(
       http.StreamedResponse streamedResponse) async {
     if (streamedResponse.statusCode == 204) {
-      return new http.Response(
+      return http.Response(
         '',
         streamedResponse.statusCode,
         headers: streamedResponse.headers.map((k, v) =>

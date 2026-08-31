@@ -1,18 +1,24 @@
-part of tomba;
+part of '../tomba.dart';
 
+/// Account
+///
+/// Manage your Tomba account.
+///
+/// See [Account API](https://docs.tomba.io/api/account)
 class Account extends Service {
-  Account(Client client) : super(client);
+  Account(super.client);
 
   /// Get Account
   ///
   /// Returns information about the current account.
   ///
-  Future<Response> getAccount() {
-    final String path = '/me';
+  /// See [Get Account API](https://docs.tomba.io/api/account#get-account)
+  Future<Response<dynamic>> getAccount() {
+    const String path = '/me';
 
-    final Map<String, dynamic> params = {};
+    const Map<String, dynamic> params = {};
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 

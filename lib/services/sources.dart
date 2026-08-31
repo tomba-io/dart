@@ -1,19 +1,26 @@
-part of tomba;
+part of '../tomba.dart';
 
+/// Sources
+///
+/// Find email address sources on the web.
+///
+/// See [Email Sources API](https://docs.tomba.io/api/sources)
 class Sources extends Service {
-  Sources(Client client) : super(client);
+  Sources(super.client);
 
   /// Email Sources
   ///
   /// Find email address source somewhere on the web.
   ///
-  Future<Response> emailSources({required String email}) {
-    final String path =
-        '/email-sources/{email}'.replaceAll(RegExp('{email}'), email);
+  /// See [Email Sources API](https://docs.tomba.io/api/sources#email-sources)
+  Future<Response<dynamic>> emailSources({required String email}) {
+    const String path = '/email-sources';
 
-    final Map<String, dynamic> params = {};
+    final Map<String, dynamic> params = {
+      'email': email,
+    };
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 

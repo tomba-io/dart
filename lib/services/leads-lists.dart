@@ -1,18 +1,24 @@
-part of tomba;
+part of '../tomba.dart';
 
+/// Leads Lists
+///
+/// Manage your leads lists.
+///
+/// See [Leads Lists API](https://docs.tomba.io/api/leads-lists)
 class LeadsLists extends Service {
-  LeadsLists(Client client) : super(client);
+  LeadsLists(super.client);
 
   /// Get Leads Lists
   ///
-  /// Returns a list of leads lists..
+  /// Returns a list of leads lists.
   ///
-  Future<Response> getLists() {
-    final String path = '/leads_lists/{id}';
+  /// See [List Leads Lists API](https://docs.tomba.io/api/leads-lists#list-leads-lists)
+  Future<Response<dynamic>> getLists() {
+    const String path = '/leads_lists';
 
-    final Map<String, dynamic> params = {};
+    const Map<String, dynamic> params = {};
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 
@@ -24,12 +30,13 @@ class LeadsLists extends Service {
   ///
   /// Delete a specific list by passing id.
   ///
-  Future<Response> deleteListId({required String id}) {
-    final String path = '/leads_lists/{id}'.replaceAll(RegExp('{id}'), id);
+  /// See [Delete List API](https://docs.tomba.io/api/lead-lists#delete-leads-list)
+  Future<Response<dynamic>> deleteListId({required String id}) {
+    final String path = '/leads_lists/$id';
 
-    final Map<String, dynamic> params = {};
+    const Map<String, dynamic> params = {};
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 
@@ -39,14 +46,17 @@ class LeadsLists extends Service {
 
   /// Create new List
   ///
-  /// Create a new leads list with the name request parameter
+  /// Create a new leads list with the name request parameter.
   ///
-  Future<Response> createList() {
-    final String path = '/leads_lists/{id}';
+  /// See [Create List API](https://docs.tomba.io/api/lead-lists#create-leads-list)
+  Future<Response<dynamic>> createList({required String name}) {
+    const String path = '/leads_lists';
 
-    final Map<String, dynamic> params = {};
+    final Map<String, dynamic> params = {
+      'name': name,
+    };
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 
@@ -58,12 +68,15 @@ class LeadsLists extends Service {
   ///
   /// Update the fields of a list using id.
   ///
-  Future<Response> updateListId({required String id}) {
-    final String path = '/leads_lists/{id}'.replaceAll(RegExp('{id}'), id);
+  /// See [Update List API](https://docs.tomba.io/api/lead-lists#update-leads-list)
+  Future<Response<dynamic>> updateListId({required String id, required String name}) {
+    final String path = '/leads_lists/$id';
 
-    final Map<String, dynamic> params = {};
+    final Map<String, dynamic> params = {
+      'name': name,
+    };
 
-    final Map<String, String> headers = {
+    const Map<String, String> headers = {
       'content-type': 'application/json',
     };
 
