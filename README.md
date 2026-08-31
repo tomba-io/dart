@@ -3,7 +3,7 @@
 > The #1 Rated Email Intelligence Platform — Find professional emails with unmatched accuracy.
 
 [![pub package](https://img.shields.io/pub/v/tomba.svg)](https://pub.dev/packages/tomba)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/tomba-io/dart/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
 This is the official Dart client library for the [Tomba.io](https://tomba.io) Email Finder API, providing access to all Tomba services including domain search, email finder, email verifier, enrichment, phone lookup, leads management, bulk operations, and more.
 
@@ -39,7 +39,7 @@ Add `tomba` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-    tomba: ^1.0.1
+    tomba: ^1.0.3
 ```
 
 Or install from the command line:
@@ -130,7 +130,7 @@ Find the email address of the author of a blog post or article.
 
 ```dart
 Finder finder = Finder(client);
-var result = await finder.authorFinder(url: 'https://example.com/blog/post');
+var result = await finder.authorFinder(url: 'https://tomba.io/blog');
 print(result);
 ```
 
@@ -485,52 +485,61 @@ dart test
 
 ## About Tomba
 
+Founded to solve the problem of unreliable email data, [Tomba.io](https://tomba.io) is the leading B2B email intelligence platform. Our AI-powered engine searches, verifies, and enriches professional contact data with unmatched accuracy.
+
 ### Products
 
-- [Email Finder](https://tomba.io/email-finder) — Find any professional email address in seconds
-- [Email Verifier](https://tomba.io/email-verifier) — Keep your email list clean and deliverable
-- [Domain Search](https://tomba.io/domain-search) — Discover all emails associated with a company
-- [Phone Finder](https://tomba.io/phone-finder) — Get direct dial phone numbers for your leads
-- [Email Enrichment](https://tomba.io/enrichment) — Enrich contacts with company and social data
-- [Bulk Email Finder](https://tomba.io/bulk-email-finder) — Find emails in bulk from a list of names and domains
-- [Bulk Email Verifier](https://tomba.io/bulk-email-verifier) — Verify thousands of emails at once
-- [Bulk Domain Search](https://tomba.io/bulk-domain-search) — Search emails across multiple domains
+- **[Email Finder](https://tomba.io/email-finder)** — Find any professional email address
+- **[Email Verifier](https://tomba.io/email-verifier)** — Verify emails in real-time
+- **[Domain Search](https://tomba.io/domain-search)** — Find all emails for a company
+- **[Phone Finder](https://tomba.io/phone-finder)** — Find direct phone numbers
+- **[Bulk Enrichment](https://tomba.io/bulks)** — Enrich contacts at scale
+- **[AI Company Search](https://tomba.io/reveal)** — Find companies with AI-powered search
+- **[CLI](https://tomba.io/cli)** — Command-line interface for Tomba
+- **[MCP Server](https://tomba.io/mcp)** — Connect AI tools (Claude, ChatGPT, Cursor) to Tomba
+- **[REST API](https://tomba.io/api)** — Full programmatic access
 
-### Browser Extensions
+### Browser Extensions & Add-ons
 
-- [Chrome Extension](https://tomba.io/chrome-extension) — Find emails while browsing LinkedIn and company websites
-- [Firefox Addon](https://tomba.io/firefox) — Email discovery right from your Firefox browser
+- **[Chrome Extension](https://chromewebstore.google.com/detail/tomba-email-finder-email/icmjegjggphchjckknoooajmklibccjb)** — Find emails while browsing
+- **[Google Sheets Add-on](https://tomba.io/sheets)** — Enrich leads in spreadsheets
+- **[Microsoft Excel Add-in](https://tomba.io/excel)** — Email finder in Excel
+- **[Airtable Integration](https://tomba.io/airtable)** — Connect with Airtable
 
 ### Integrations
 
-- [HubSpot](https://tomba.io/hubspot) — Sync found emails directly to HubSpot
-- [Zapier](https://tomba.io/integrations/zapier) — Connect Tomba to 5,000+ apps
-- [Google Sheets](https://tomba.io/sheets) — Find and verify emails inside Google Sheets
+50+ CRM and sales tool integrations:
+[Salesforce](https://tomba.io/integrations) · [HubSpot](https://tomba.io/integrations) · [Zapier](https://tomba.io/integrations) · [Pipedrive](https://tomba.io/integrations) · [and more...](https://tomba.io/integrations)
 
-### Other SDKs
+### Other Tomba SDKs
 
-| Language | GitHub                                                | Package                                                   |
-| -------- | ----------------------------------------------------- | --------------------------------------------------------- |
-| PHP      | [tomba-io/php](https://github.com/tomba-io/php)       | [Packagist](https://packagist.org/packages/tomba-io/php)  |
-| Python   | [tomba-io/python](https://github.com/tomba-io/python) | [PyPI](https://pypi.org/project/tomba)                    |
-| Go       | [tomba-io/go](https://github.com/tomba-io/go)         | [Go Packages](https://pkg.go.dev/github.com/tomba-io/go)  |
-| Java     | [tomba-io/java](https://github.com/tomba-io/java)     | [Maven](https://search.maven.org/artifact/io.tomba/tomba) |
-| Ruby     | [tomba-io/ruby](https://github.com/tomba-io/ruby)     | [RubyGems](https://rubygems.org/gems/tomba)               |
-| C#       | [tomba-io/csharp](https://github.com/tomba-io/csharp) | [NuGet](https://www.nuget.org/packages/Tomba)             |
-| Rust     | [tomba-io/rust](https://github.com/tomba-io/rust)     | [Crates.io](https://crates.io/crates/tomba)               |
-| Dart     | [tomba-io/dart](https://github.com/tomba-io/dart)     | [pub.dev](https://pub.dev/packages/tomba)                 |
-| Lua      | [tomba-io/lua](https://github.com/tomba-io/lua)       | [LuaRocks](https://luarocks.org/modules/benemohamed/tomba)   |
-| Deno     | [tomba-io/deno](https://github.com/tomba-io/deno)     | [deno.land](https://deno.land/x/tombaio)                    |
+| Language | Package                                                     |
+| -------- | ----------------------------------------------------------- |
+| Node.js  | [tomba](https://www.npmjs.com/package/tomba)                |
+| Python   | [tomba-io](https://pypi.org/project/tomba-io/)              |
+| PHP      | [tomba-io/php](https://packagist.org/packages/tomba-io/php) |
+| Ruby     | [tomba](https://rubygems.org/gems/tomba)                    |
+| Go       | [tomba-io/go](https://pkg.go.dev/github.com/tomba-io/go)    |
+| Rust     | [tomba](https://crates.io/crates/tomba)                     |
+| Dart     | [tomba](https://pub.dev/packages/tomba)                     |
+| Deno     | [@tomba/sdk](https://jsr.io/@tomba/sdk)                     |
+| Elixir   | [tomba](https://hex.pm/packages/tomba)                      |
+| C#       | [Tomba](https://www.nuget.org/packages/Tomba)               |
+| Perl     | [Tomba::Client](https://metacpan.org/pod/Tomba::Client)     |
+| Lua      | [tomba](https://luarocks.org/modules/tomba/tomba)           |
+| R        | [tomba](https://github.com/tomba-io/r)                      |
 
 ### Resources
 
-- [API Documentation](https://docs.tomba.io/) — Complete API reference
-- [Blog](https://tomba.io/blog) — Tips on email finding and outreach
-- [FAQ](https://help.tomba.io/en/) — Frequently asked questions
+- [Blog](https://tomba.io/blog)
+- [Help Center](https://help.tomba.io)
+- [API Documentation](https://docs.tomba.io)
+- [Pricing](https://tomba.io/pricing)
+- [Status Page](https://status.tomba.io)
 
 ---
 
-**[Try Tomba Free](https://app.tomba.io/auth/register)** — 50 free searches/month. No credit card required.
+**[Try Tomba Free](https://app.tomba.io/auth/register)** — Find your first email in seconds. No credit card required.
 
 ## License
 
