@@ -34,7 +34,8 @@ class Flag extends Service {
   /// Create a new email address flag.
   ///
   /// See [Create Flag API](https://docs.tomba.io/api/flag#create-flag)
-  Future<Response<dynamic>> createFlag({required String email, required String flag}) {
+  Future<Response<dynamic>> createFlag(
+      {required String email, required String flag}) {
     const String path = '/flags';
 
     final Map<String, dynamic> params = {

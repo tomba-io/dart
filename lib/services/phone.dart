@@ -14,7 +14,8 @@ class PhoneFinder extends Service {
   /// returns phone data.
   ///
   /// See [Phone Finder API](https://docs.tomba.io/api/phone#phone-finder)
-  Future<Response<dynamic>> finder({required String email, String? webhookUrl}) {
+  Future<Response<dynamic>> finder(
+      {required String email, String? webhookUrl}) {
     const String path = '/phone-finder';
 
     final Map<String, dynamic> params = {

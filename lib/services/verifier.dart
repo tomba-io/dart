@@ -13,7 +13,8 @@ class Verifier extends Service {
   /// Verify the deliverability of an email address.
   ///
   /// See [Email Verifier API](https://docs.tomba.io/api/verifier#email-verifier)
-  Future<Response<dynamic>> emailVerifier({required String email, String? webhookUrl}) {
+  Future<Response<dynamic>> emailVerifier(
+      {required String email, String? webhookUrl}) {
     const String path = '/email-verifier';
 
     final Map<String, dynamic> params = {

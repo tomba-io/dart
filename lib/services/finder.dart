@@ -42,7 +42,8 @@ class Finder extends Service {
   /// from a blog post url.
   ///
   /// See [Author Finder API](https://docs.tomba.io/api/finder#author-finder)
-  Future<Response<dynamic>> authorFinder({required String url, String? webhookUrl}) {
+  Future<Response<dynamic>> authorFinder(
+      {required String url, String? webhookUrl}) {
     const String path = '/author-finder';
 
     final Map<String, dynamic> params = {
@@ -64,7 +65,8 @@ class Finder extends Service {
   /// from a Linkedin URL.
   ///
   /// See [Linkedin Finder API](https://docs.tomba.io/api/finder#linkedin-finder)
-  Future<Response<dynamic>> linkedinFinder({required String url, String? webhookUrl}) {
+  Future<Response<dynamic>> linkedinFinder(
+      {required String url, String? webhookUrl}) {
     const String path = '/linkedin';
 
     final Map<String, dynamic> params = {
@@ -86,7 +88,8 @@ class Finder extends Service {
   /// phone data.
   ///
   /// See [Phone Finder API](https://docs.tomba.io/api/finder#phone-finder)
-  Future<Response<dynamic>> phoneFinder({required String email, String? webhookUrl}) {
+  Future<Response<dynamic>> phoneFinder(
+      {required String email, String? webhookUrl}) {
     const String path = '/phone-finder';
 
     final Map<String, dynamic> params = {

@@ -69,7 +69,8 @@ class LeadsLists extends Service {
   /// Update the fields of a list using id.
   ///
   /// See [Update List API](https://docs.tomba.io/api/lead-lists#update-leads-list)
-  Future<Response<dynamic>> updateListId({required String id, required String name}) {
+  Future<Response<dynamic>> updateListId(
+      {required String id, required String name}) {
     final String path = '/leads_lists/$id';
 
     final Map<String, dynamic> params = {

@@ -13,7 +13,8 @@ class Enrichment extends Service {
   /// Get enrichment data for a person based on their email address.
   ///
   /// See [Person Enrichment API](https://docs.tomba.io/api/enrichment#person-enrichment)
-  Future<Response<dynamic>> person({required String email, String? webhookUrl}) {
+  Future<Response<dynamic>> person(
+      {required String email, String? webhookUrl}) {
     const String path = '/enrichment';
 
     final Map<String, dynamic> params = {

@@ -71,7 +71,8 @@ class LeadsAttributes extends Service {
   /// Update the fields of an Attribute using id.
   ///
   /// See [Update Lead Attribute API](https://docs.tomba.io/api/leads-attributes#update-lead-attribute)
-  Future<Response<dynamic>> updateLeadAttribute({required String id, String? name}) {
+  Future<Response<dynamic>> updateLeadAttribute(
+      {required String id, String? name}) {
     final String path = '/leads/attributes/$id';
 
     final Map<String, dynamic> params = {

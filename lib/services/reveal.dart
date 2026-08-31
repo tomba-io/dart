@@ -13,7 +13,8 @@ class Reveal extends Service {
   /// Search for companies by various criteria.
   ///
   /// See [Companies Search API](https://docs.tomba.io/api/reveal#companies-search)
-  Future<Response<dynamic>> companiesSearch({required String query, int? page, int? limit}) {
+  Future<Response<dynamic>> companiesSearch(
+      {required String query, int? page, int? limit}) {
     const String path = '/reveal';
 
     final Map<String, dynamic> params = {

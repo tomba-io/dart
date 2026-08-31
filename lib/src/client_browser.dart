@@ -87,9 +87,8 @@ class ClientBrowser extends ClientBase with ClientMixin {
       params: params,
     );
     try {
-      final streamedResponse = await _httpClient
-          .send(request)
-          .timeout(const Duration(seconds: 120));
+      final streamedResponse =
+          await _httpClient.send(request).timeout(const Duration(seconds: 120));
       res = await toResponse(streamedResponse);
 
       return prepareResponse(res, responseType: responseType);

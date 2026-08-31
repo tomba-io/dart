@@ -168,7 +168,8 @@ void main() {
 
     test('should format toString correctly', () {
       final exception = TombaException('Server error', 500);
-      expect(exception.toString(), equals('TombaException: Server error (500)'));
+      expect(
+          exception.toString(), equals('TombaException: Server error (500)'));
     });
   });
 
