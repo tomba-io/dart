@@ -519,8 +519,8 @@ dart test
 | C#       | [tomba-io/csharp](https://github.com/tomba-io/csharp) | [NuGet](https://www.nuget.org/packages/Tomba)             |
 | Rust     | [tomba-io/rust](https://github.com/tomba-io/rust)     | [Crates.io](https://crates.io/crates/tomba)               |
 | Dart     | [tomba-io/dart](https://github.com/tomba-io/dart)     | [pub.dev](https://pub.dev/packages/tomba)                 |
-| Lua      | [tomba-io/lua](https://github.com/tomba-io/lua)       | [LuaRocks](https://luarocks.org/modules/tomba-io/tomba)   |
-| Deno     | [tomba-io/deno](https://github.com/tomba-io/deno)     | [deno.land](https://deno.land/x/tomba)                    |
+| Lua      | [tomba-io/lua](https://github.com/tomba-io/lua)       | [LuaRocks](https://luarocks.org/modules/benemohamed/tomba)   |
+| Deno     | [tomba-io/deno](https://github.com/tomba-io/deno)     | [deno.land](https://deno.land/x/tombaio)                    |
 
 ### Resources
 
