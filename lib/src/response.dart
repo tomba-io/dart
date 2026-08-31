@@ -2,6 +2,35 @@ import 'dart:convert';
 
 /// Rate-limit information extracted from response headers.
 class RateLimit {
+  const RateLimit({
+    this.xSecondRateLimit,
+    this.xMinuteRateLimit,
+    this.xDailyRateLimit,
+    this.xMinuteRequestLeft,
+    this.xDailyRequestLeft,
+    this.xMinuteResetSeconds,
+    this.xDailyResetSeconds,
+    this.retryAfter,
+    this.rateLimitPolicy,
+    this.rateLimit,
+  });
+
+  /// Parse rate-limit headers from an HTTP response header map.
+  factory RateLimit.fromHeaders(Map<String, String> headers) {
+    return RateLimit(
+      xSecondRateLimit: headers['x-second-rate-limit'],
+      xMinuteRateLimit: headers['x-minute-rate-limit'],
+      xDailyRateLimit: headers['x-daily-rate-limit'],
+      xMinuteRequestLeft: headers['x-minute-request-left'],
+      xDailyRequestLeft: headers['x-daily-request-left'],
+      xMinuteResetSeconds: headers['x-minute-reset-seconds'],
+      xDailyResetSeconds: headers['x-daily-reset-seconds'],
+      retryAfter: headers['retry-after'],
+      rateLimitPolicy: headers['ratelimit-policy'],
+      rateLimit: headers['ratelimit'],
+    );
+  }
+
   /// Maximum requests allowed per second.
   final String? xSecondRateLimit;
 
@@ -31,35 +60,6 @@ class RateLimit {
 
   /// Standard `RateLimit` header value.
   final String? rateLimit;
-
-  const RateLimit({
-    this.xSecondRateLimit,
-    this.xMinuteRateLimit,
-    this.xDailyRateLimit,
-    this.xMinuteRequestLeft,
-    this.xDailyRequestLeft,
-    this.xMinuteResetSeconds,
-    this.xDailyResetSeconds,
-    this.retryAfter,
-    this.rateLimitPolicy,
-    this.rateLimit,
-  });
-
-  /// Parse rate-limit headers from an HTTP response header map.
-  factory RateLimit.fromHeaders(Map<String, String> headers) {
-    return RateLimit(
-      xSecondRateLimit: headers['x-second-rate-limit'],
-      xMinuteRateLimit: headers['x-minute-rate-limit'],
-      xDailyRateLimit: headers['x-daily-rate-limit'],
-      xMinuteRequestLeft: headers['x-minute-request-left'],
-      xDailyRequestLeft: headers['x-daily-request-left'],
-      xMinuteResetSeconds: headers['x-minute-reset-seconds'],
-      xDailyResetSeconds: headers['x-daily-reset-seconds'],
-      retryAfter: headers['retry-after'],
-      rateLimitPolicy: headers['ratelimit-policy'],
-      rateLimit: headers['ratelimit'],
-    );
-  }
 
   Map<String, dynamic> toJson() => {
         'x_second_rate_limit': xSecondRateLimit,

@@ -8,13 +8,34 @@ part of '../tomba.dart';
 class Bulk extends Service {
   Bulk(super.client);
 
+  static const validTypes = [
+    'search',
+    'similar',
+    'company',
+    'finder',
+    'enrich',
+    'linkedin',
+    'author',
+    'verifier',
+    'phone-finder',
+    'phone-validator'
+  ];
+
+  void _validateType(String type) {
+    if (!validTypes.contains(type)) {
+      throw Exception(
+          'Invalid bulk type: "$type". Must be one of: ${validTypes.join(", ")}');
+    }
+  }
+
   /// List Bulk Tasks
   ///
   /// Returns a list of bulk tasks.
   ///
   /// See [List Bulk API](https://docs.tomba.io/api/bulks)
-  Future<Response<dynamic>> list() {
-    const String path = '/bulk';
+  Future<Response<dynamic>> list({required String type}) {
+    _validateType(type);
+    final String path = '/bulk/$type';
 
     const Map<String, dynamic> params = {};
 
@@ -31,8 +52,9 @@ class Bulk extends Service {
   /// Returns a specific bulk task by its id.
   ///
   /// See [Get Bulk API](https://docs.tomba.io/api/bulk#get-bulk)
-  Future<Response<dynamic>> get({required String id}) {
-    final String path = '/bulk/$id';
+  Future<Response<dynamic>> get({required String type, required String id}) {
+    _validateType(type);
+    final String path = '/bulk/$type/$id';
 
     const Map<String, dynamic> params = {};
 
@@ -48,9 +70,11 @@ class Bulk extends Service {
   ///
   /// Create a new bulk task.
   ///
-  /// See [Create Bulk API](https://docs.tomba.io/api/bulk#create-bulk)
-  Future<Response<dynamic>> create({required Map<String, dynamic> data}) {
-    const String path = '/bulk';
+  /// See [Create Bulk API](https://docs.tomba.io/api/bulk)
+  Future<Response<dynamic>> create(
+      {required String type, required Map<String, dynamic> data}) {
+    _validateType(type);
+    final String path = '/bulk/$type';
 
     final Map<String, dynamic> params = data;
 
@@ -66,9 +90,10 @@ class Bulk extends Service {
   ///
   /// Launch a bulk task by its id.
   ///
-  /// See [Launch Bulk API](https://docs.tomba.io/api/bulk#launch-bulk)
-  Future<Response<dynamic>> launch({required String id}) {
-    final String path = '/bulk/$id/launch';
+  /// See [Launch Bulk API](https://docs.tomba.io/api/bulk)
+  Future<Response<dynamic>> launch({required String type, required String id}) {
+    _validateType(type);
+    final String path = '/bulk/$type/$id';
 
     const Map<String, dynamic> params = {};
 
@@ -84,9 +109,10 @@ class Bulk extends Service {
   ///
   /// Delete a specific bulk task by its id.
   ///
-  /// See [Delete Bulk API](https://docs.tomba.io/api/bulk#delete-bulk)
-  Future<Response<dynamic>> delete({required String id}) {
-    final String path = '/bulk/$id';
+  /// See [Delete Bulk API](https://docs.tomba.io/api/bulk)
+  Future<Response<dynamic>> delete({required String type, required String id}) {
+    _validateType(type);
+    final String path = '/bulk/$type/$id';
 
     const Map<String, dynamic> params = {};
 
@@ -102,9 +128,11 @@ class Bulk extends Service {
   ///
   /// Archive a bulk task by its id.
   ///
-  /// See [Archive Bulk API](https://docs.tomba.io/api/bulk#archive-bulk)
-  Future<Response<dynamic>> archive({required String id}) {
-    final String path = '/bulk/$id/archive';
+  /// See [Archive Bulk API](https://docs.tomba.io/api/bulk)
+  Future<Response<dynamic>> archive(
+      {required String type, required String id}) {
+    _validateType(type);
+    final String path = '/bulk/$type/$id/archive';
 
     const Map<String, dynamic> params = {};
 
@@ -120,9 +148,11 @@ class Bulk extends Service {
   ///
   /// Rename a bulk task by its id.
   ///
-  /// See [Rename Bulk API](https://docs.tomba.io/api/bulk#rename-bulk)
-  Future<Response<dynamic>> rename({required String id, required String name}) {
-    final String path = '/bulk/$id/rename';
+  /// See [Rename Bulk API](https://docs.tomba.io/api/bulk)
+  Future<Response<dynamic>> rename(
+      {required String type, required String id, required String name}) {
+    _validateType(type);
+    final String path = '/bulk/$type/$id/rename';
 
     final Map<String, dynamic> params = {
       'name': name,
@@ -140,9 +170,11 @@ class Bulk extends Service {
   ///
   /// Get the progress of a bulk task by its id.
   ///
-  /// See [Bulk Progress API](https://docs.tomba.io/api/bulk#bulk-progress)
-  Future<Response<dynamic>> progress({required String id}) {
-    final String path = '/bulk/$id/progress';
+  /// See [Bulk Progress API](https://docs.tomba.io/api/bulk)
+  Future<Response<dynamic>> progress(
+      {required String type, required String id}) {
+    _validateType(type);
+    final String path = '/bulk/$type/$id/progress';
 
     const Map<String, dynamic> params = {};
 
@@ -158,9 +190,11 @@ class Bulk extends Service {
   ///
   /// Download the results of a bulk task by its id.
   ///
-  /// See [Download Bulk API](https://docs.tomba.io/api/bulk#download-bulk)
-  Future<Response<dynamic>> download({required String id}) {
-    final String path = '/bulk/$id/download';
+  /// See [Download Bulk API](https://docs.tomba.io/api/bulk)
+  Future<Response<dynamic>> download(
+      {required String type, required String id}) {
+    _validateType(type);
+    final String path = '/bulk/$type/$id/download';
 
     const Map<String, dynamic> params = {};
 
