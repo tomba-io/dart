@@ -2,7 +2,7 @@ part of '../tomba.dart';
 
 /// Location
 ///
-/// Get location information based on IP address.
+/// Get location information based on Domain.
 ///
 /// See [Location API](https://docs.tomba.io/api/finder#location)
 class Location extends Service {
@@ -10,7 +10,7 @@ class Location extends Service {
 
   /// Get Location
   ///
-  /// Get the current location information based on IP address.
+  /// Get the current location information based on Domain.
   ///
   /// See [Get Location API](https://docs.tomba.io/api/finder#location#get-location)
   Future<Response<dynamic>> getLocation() {

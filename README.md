@@ -263,11 +263,11 @@ print(result);
 
 ### Location
 
-Get location information based on IP address.
+Get employee location data for a domain.
 
 ```dart
 Location location = Location(client);
-var result = await location.getLocation();
+var result = await location.getLocation(domain: 'tomba.io');
 print(result);
 ```
 
