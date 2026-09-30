@@ -27,7 +27,7 @@ class ClientIO extends ClientBase with ClientMixin {
     _httpClient = IOClient(_nativeClient);
     _headers = {
       'content-type': 'application/json',
-      'x-sdk-version': 'tomba:dart:v1.0.1',
+      'x-sdk-version': 'tomba:dart:v1.1.1',
     };
 
     config = {};

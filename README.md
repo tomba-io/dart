@@ -39,7 +39,7 @@ Add `tomba` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-    tomba: ^1.0.3
+    tomba: ^1.1.1
 ```
 
 Or install from the command line:
