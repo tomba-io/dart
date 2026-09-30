@@ -28,7 +28,7 @@ class Domain extends Service {
       'page': page,
       'limit': limit,
       'department': department,
-      'enrich_mobile': enrichMobile,
+      'enrich_mobile': enrichMobile?.toString(),
       'webhook_url': webhookUrl,
     };
 

@@ -13,11 +13,11 @@ class Format extends Service {
   /// Check the format of an email address and return detailed information.
   ///
   /// See [Email Format API](https://docs.tomba.io/api/format#email-format)
-  Future<Response<dynamic>> emailFormat({required String email}) {
+  Future<Response<dynamic>> emailFormat({required String domain}) {
     const String path = '/email-format';
 
     final Map<String, dynamic> params = {
-      'email': email,
+      'domain': domain,
     };
 
     const Map<String, String> headers = {

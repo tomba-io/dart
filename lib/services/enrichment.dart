@@ -15,7 +15,7 @@ class Enrichment extends Service {
   /// See [Person Enrichment API](https://docs.tomba.io/api/enrichment#person-enrichment)
   Future<Response<dynamic>> person(
       {required String email, String? webhookUrl}) {
-    const String path = '/enrichment';
+    const String path = '/people/find';
 
     final Map<String, dynamic> params = {
       'email': email,
@@ -36,7 +36,7 @@ class Enrichment extends Service {
   ///
   /// See [Company Enrichment API](https://docs.tomba.io/api/enrichment#company-enrichment)
   Future<Response<dynamic>> company({required String domain}) {
-    const String path = '/enrichment/company';
+    const String path = '/companies/find';
 
     final Map<String, dynamic> params = {
       'domain': domain,
@@ -56,7 +56,7 @@ class Enrichment extends Service {
   ///
   /// See [Combined Enrichment API](https://docs.tomba.io/api/enrichment#combined-enrichment)
   Future<Response<dynamic>> combined({required String email}) {
-    const String path = '/enrichment/combined';
+    const String path = '/combined/find';
 
     final Map<String, dynamic> params = {
       'email': email,

@@ -14,7 +14,7 @@ class LeadsAttributes extends Service {
   ///
   /// See [List Lead Attributes API](https://docs.tomba.io/api/leads-attributes#list-lead-attributes)
   Future<Response<dynamic>> getLeadAttributes() {
-    const String path = '/leads/attributes';
+    const String path = '/attributes';
 
     const Map<String, dynamic> params = {};
 
@@ -32,7 +32,7 @@ class LeadsAttributes extends Service {
   ///
   /// See [Delete Lead Attribute API](https://docs.tomba.io/api/leads-attributes#delete-lead-attribute)
   Future<Response<dynamic>> deleteLeadAttribute({required String id}) {
-    final String path = '/leads/attributes/$id';
+    final String path = '/attributes/$id';
 
     const Map<String, dynamic> params = {};
 
@@ -51,7 +51,7 @@ class LeadsAttributes extends Service {
   /// See [Create Lead Attribute API](https://docs.tomba.io/api/leads-attributes#create-lead-attribute)
   Future<Response<dynamic>> createLeadAttribute(
       {required String name, required String type}) {
-    const String path = '/leads/attributes';
+    const String path = '/attributes';
 
     final Map<String, dynamic> params = {
       'name': name,
@@ -73,7 +73,7 @@ class LeadsAttributes extends Service {
   /// See [Update Lead Attribute API](https://docs.tomba.io/api/leads-attributes#update-lead-attribute)
   Future<Response<dynamic>> updateLeadAttribute(
       {required String id, String? name}) {
-    final String path = '/leads/attributes/$id';
+    final String path = '/attributes/$id';
 
     final Map<String, dynamic> params = {
       'name': name,

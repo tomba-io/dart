@@ -14,7 +14,7 @@ class Flag extends Service {
   ///
   /// See [List Flags API](https://docs.tomba.io/api/flag#list-flags)
   Future<Response<dynamic>> listFlags({int? page, int? limit}) {
-    const String path = '/flags';
+    const String path = '/flag';
 
     final Map<String, dynamic> params = {
       'page': page,
@@ -35,12 +35,17 @@ class Flag extends Service {
   ///
   /// See [Create Flag API](https://docs.tomba.io/api/flag#create-flag)
   Future<Response<dynamic>> createFlag(
-      {required String email, required String flag}) {
-    const String path = '/flags';
+      {required String flagType,
+      required String value,
+      required String reason,
+      String? comment}) {
+    const String path = '/flag';
 
     final Map<String, dynamic> params = {
-      'email': email,
-      'flag': flag,
+      'flag_type': flagType,
+      'value': value,
+      'reason': reason,
+      'comment': comment,
     };
 
     const Map<String, String> headers = {

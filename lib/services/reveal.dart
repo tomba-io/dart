@@ -15,7 +15,7 @@ class Reveal extends Service {
   /// See [Companies Search API](https://docs.tomba.io/api/reveal#companies-search)
   Future<Response<dynamic>> companiesSearch(
       {required String query, int? page, int? limit}) {
-    const String path = '/reveal';
+    const String path = '/reveal/search';
 
     final Map<String, dynamic> params = {
       'query': query,
@@ -27,7 +27,7 @@ class Reveal extends Service {
       'content-type': 'application/json',
     };
 
-    return client.call(HttpMethod.get,
+    return client.call(HttpMethod.post,
         path: path, params: params, headers: headers);
   }
 }

@@ -13,10 +13,12 @@ class Location extends Service {
   /// Get the current location information based on Domain.
   ///
   /// See [Get Location API](https://docs.tomba.io/api/finder#location#get-location)
-  Future<Response<dynamic>> getLocation() {
+  Future<Response<dynamic>> getLocation({required String domain}) {
     const String path = '/location';
 
-    const Map<String, dynamic> params = {};
+    final Map<String, dynamic> params = {
+      'domain': domain,
+    };
 
     const Map<String, String> headers = {
       'content-type': 'application/json',
