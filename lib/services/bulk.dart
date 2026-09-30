@@ -101,7 +101,7 @@ class Bulk extends Service {
       'content-type': 'application/json',
     };
 
-    return client.call(HttpMethod.post,
+    return client.call(HttpMethod.put,
         path: path, params: params, headers: headers);
   }
 
@@ -112,7 +112,7 @@ class Bulk extends Service {
   /// See [Delete Bulk API](https://docs.tomba.io/api/bulk)
   Future<Response<dynamic>> delete({required String type, required String id}) {
     _validateType(type);
-    final String path = '/bulk/$type/$id';
+    final String path = '/bulk/$type/$id/delete';
 
     const Map<String, dynamic> params = {};
 
@@ -140,7 +140,7 @@ class Bulk extends Service {
       'content-type': 'application/json',
     };
 
-    return client.call(HttpMethod.post,
+    return client.call(HttpMethod.delete,
         path: path, params: params, headers: headers);
   }
 
